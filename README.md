@@ -1,2 +1,2 @@
 # Resume
-Collection of all my projects
+1. snake game - python
