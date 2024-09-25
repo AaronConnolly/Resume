@@ -4,10 +4,14 @@ import time
 import random
 
 snake_speed = 10
+blockSize = 30
+offset_y = 60
+offset_x = 30
 
 # Window size
-window_x = 720
-window_y = 480
+window_x = 660
+window_y = 600
+totalBlocks = ((window_x-(offset_x * 2)) * (window_y-offset_y-offset_x)) / blockSize
 
 # Defining colours
 black = pygame.Color(0, 0, 0)
@@ -28,26 +32,35 @@ game_window = pygame.display.set_mode((window_x, window_y))
 fps = pygame.time.Clock()
 
 # defining snake default position
-snake_position = [100, 40]
+snake_position = [90, 150]
 
 # defining first 4 blocks of snakes body
-snake_body = [[100, 40],
-              [80, 40],
-              [60,40],
-              [40,40]]
+snake_body = [[90, 150],
+              [60, 150],
+              [30, 150]]
 
 # fruit position
-fruit_position = [random.randrange(1, (window_x//20)) * 20,
-                  random.randrange(1, (window_y//20)) * 20]
+def fruitSpawn(body):
+    while True:
+        x = [random.randrange(2, ((window_x - offset_x) // blockSize)) * blockSize,
+             random.randrange(4, ((window_y - offset_y) // blockSize)) * blockSize]
+        if x not in body:  # Ensure the fruit does not spawn inside the snake's body
+            return x
+
+
+fruit_position = fruitSpawn(snake_body)
 fruit_spawn = True
 
 # setting default snake direction
-# towards right
 direction = 'RIGHT'
 change_to = direction
 
 # initial score
 score = 0
+
+# game_started flag
+game_started = False
+
 def show_score(choice, color, font, size):
     # creating font object score_font
     score_font = pygame.font.SysFont(font, size)
@@ -63,56 +76,50 @@ def show_score(choice, color, font, size):
     # displaying text
     game_window.blit(score_surface, score_rect)
 
-
 # game over function
-def game_over():
-    # creating font object my_font
+def game_over(victory):
     my_font = pygame.font.SysFont('times new roman', 50)
-
-    # creating a text surface on which text
-    # will be drawn
-    game_over_surface = my_font.render('Your Score is : ' + str(score), True, red)
-
-    # create a rectangular object for the text
-    # surface object
+    if victory:
+        game_over_surface = my_font.render('You Win!!!', True, white)
+    else:
+        game_over_surface = my_font.render('Your Score is : ' + str(score), True, red)
     game_over_rect = game_over_surface.get_rect()
-
-    # setting position of the text
     game_over_rect.midtop = (window_x / 2, window_y / 4)
-
-    # blit will draw the text on screen
     game_window.blit(game_over_surface, game_over_rect)
     pygame.display.flip()
-
-    # after 2 seconds we will quit the
-    # program
     time.sleep(2)
-
-    # deactivating pygame library
     pygame.quit()
-
-    # quit the program
     quit()
-
 
 # Main Function
 while True:
-
     # handling key events
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 change_to = 'UP'
+                game_started = True  # Start game on first key press
             if event.key == pygame.K_DOWN:
                 change_to = 'DOWN'
+                game_started = True
             if event.key == pygame.K_LEFT:
                 change_to = 'LEFT'
+                game_started = True
             if event.key == pygame.K_RIGHT:
                 change_to = 'RIGHT'
+                game_started = True
 
-    # If two keys pressed simultaneously
-    # we don't want snake to move into two directions
-    # simultaneously
+    if not game_started:
+        # Show "Press any key to start" message
+        game_window.fill(black)
+        start_font = pygame.font.SysFont('times new roman', 40)
+        start_surface = start_font.render('Press arrow key to start', True, white)
+        start_rect = start_surface.get_rect(center=(window_x // 2, window_y // 2))
+        game_window.blit(start_surface, start_rect)
+        pygame.display.flip()
+        continue  # Skip the rest of the loop until a key is pressed
+
+    # If two keys pressed simultaneously, we don't want snake to move into two directions
     if change_to == 'UP' and direction != 'DOWN':
         direction = 'UP'
     if change_to == 'DOWN' and direction != 'UP':
@@ -124,17 +131,15 @@ while True:
 
     # Moving the snake
     if direction == 'UP':
-        snake_position[1] -= 20
+        snake_position[1] -= blockSize
     if direction == 'DOWN':
-        snake_position[1] += 20
+        snake_position[1] += blockSize
     if direction == 'LEFT':
-        snake_position[0] -= 20
+        snake_position[0] -= blockSize
     if direction == 'RIGHT':
-        snake_position[0] += 20
+        snake_position[0] += blockSize
 
     # Snake body growing mechanism
-    # if fruits and snakes collide then scores will be
-    # incremented by 10
     snake_body.insert(0, list(snake_position))
     if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
         score += 1
@@ -143,47 +148,50 @@ while True:
         snake_body.pop()
 
     if not fruit_spawn:
-        fruit_position = [random.randrange(1, (window_x // 20)) * 20,
-                          random.randrange(1, (window_y // 20)) * 20]
-
+        fruit_position = fruitSpawn(snake_body)
     fruit_spawn = True
 
-    # checkered background
+    # Checkered background
     background = pygame.Surface(game_window.get_size())
-    ts, w, h, c1, c2 = 20, background.get_width(), background.get_height(), (144, 238, 144), (100, 170, 120)
-    tiles = [((x * ts, y * ts, ts, ts), c1 if (x + y) % 2 == 0 else c2) for x in range((w + ts - 1) // ts) for y in
-             range((h + ts - 1) // ts)]
+    w, h, c1, c2 = background.get_width() - offset_y, background.get_height() - (offset_x * 3), (144, 238, 144), (100, 170, 120)
+    tiles = [((x * blockSize + offset_x, y * blockSize + offset_y, blockSize, blockSize), c1 if (x + y) % 2 == 0 else c2)
+             for x in range((w + blockSize - 1) // blockSize)
+             for y in range((h + blockSize - 1) // blockSize)]
     [pygame.draw.rect(background, color, rect) for rect, color in tiles]
-    game_window.blit(background, (0,0))
+    game_window.blit(background, (0, 0))
 
-
-    # grids
-    blockSize = 20  # Set the size of the grid block
+    # Draw grid
     for x in range(0, w, blockSize):
         for y in range(0, h, blockSize):
-            rect = pygame.Rect(x, y, blockSize, blockSize)
+            rect = pygame.Rect(x + offset_x, y + offset_y, blockSize, blockSize)
             pygame.draw.rect(game_window, white, rect, 1)
 
-    for pos in snake_body:
-        pygame.draw.rect(game_window, green, pygame.Rect(
-            pos[0], pos[1], 20, 20))
+    for index, pos in enumerate(snake_body):
+        if index == 0:  # This is the head
+            pygame.draw.rect(game_window, black, pygame.Rect(pos[0], pos[1], blockSize, blockSize))  # Different color for head
+        else:  # The rest of the body
+            pygame.draw.rect(game_window, green, pygame.Rect(pos[0], pos[1], blockSize, blockSize))
 
-    pygame.draw.rect(game_window, red, pygame.Rect(
-        fruit_position[0], fruit_position[1], 20, 20))
+    pygame.draw.rect(game_window, red, pygame.Rect(fruit_position[0], fruit_position[1], blockSize, blockSize))
 
     # Game Over conditions
-    if snake_position[0] < 0 or snake_position[0] > window_x - 10:
-        game_over()
-    if snake_position[1] < 0 or snake_position[1] > window_y - 10:
-        game_over()
+    if snake_position[0] < 30 or snake_position[0] > window_x - 30:
+        victory = False
+        game_over(victory)
+    if snake_position[1] < 60 or snake_position[1] > window_y - 30:
+        victory = False
+        game_over(victory)
+    if len(snake_body) == totalBlocks:
+        victory = True
+        game_over(victory)
 
-    # Touching the snake body
     for block in snake_body[1:]:
         if snake_position[0] == block[0] and snake_position[1] == block[1]:
-            game_over()
+            victory = False
+            game_over(victory)
 
-    # displaying score continuously
-    show_score(1, black, 'times new roman', 40)
+    # Display score
+    show_score(1, white, 'times new roman', 40)
 
     # Refresh game screen
     pygame.display.update()

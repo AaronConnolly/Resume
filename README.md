@@ -1,2 +1,5 @@
 # Resume
-Collection of all my projects
+Aaron Connolly
+
+Snake Game - Python
+
