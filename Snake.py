@@ -175,10 +175,10 @@ while True:
     pygame.draw.rect(game_window, red, pygame.Rect(fruit_position[0], fruit_position[1], blockSize, blockSize))
 
     # Game Over conditions
-    if snake_position[0] < 30 or snake_position[0] > window_x - 30:
+    if snake_position[0] < offset_x or snake_position[0] > window_x - (offset_x *2):
         victory = False
         game_over(victory)
-    if snake_position[1] < 60 or snake_position[1] > window_y - 30:
+    if snake_position[1] < offset_y or snake_position[1] > window_y - offset_x:
         victory = False
         game_over(victory)
     if len(snake_body) == totalBlocks:
