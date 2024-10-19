@@ -1,0 +1,445 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+.main {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(17, 2, 102, 0.645), rgba(8, 1, 69, 0.662)), url(../library2.jpg);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 200px;
+}
+
+.main2 {
+    width: 100%;
+    min-height: 100vh;
+}
+
+                                        /* Start Nav bar*/
+
+
+nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgb(89, 89, 134);
+
+}
+
+.logo {
+    width: 180px;
+    cursor: pointer;
+    
+}
+
+nav h1{
+    color: white;
+    font-weight: 300;
+    font-family: oblique, serif;
+    font-size: 40px;
+}
+
+ul li {
+    display: inline-block;
+    position: relative;
+}
+
+ul li a{
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+}
+
+ul li a:hover{
+    color: rgb(141, 204, 223);
+}
+
+.btn{
+    display: flex;
+    align-items: center;
+    padding:10px 20px;
+    margin-right: 30px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    background: #f5168d;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #ee94c5;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.btn img{
+    width: 20px;
+    margin-right: 20px;
+}
+
+                                    /* End Nav bar*/
+
+                                    /* Start Content*/
+.content{
+    color: white;
+    max-width: 800px;
+    padding:0px 8%;
+}
+.content h1{
+    padding-top: 15%;
+    font-size: 70px;
+    font-weight: 600;
+    line-height: 85px;
+    margin-bottom: 10px;
+}
+
+.content form{
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.content form input{
+    border: 0;
+    outline: 0;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.btn2{
+    
+    align-items: center;
+    font-size: 15px;
+    padding: 10px 30px;
+    background-color: transparent;
+    border: 0px;
+    font-family: oblique, serif;
+}
+
+.btn2 img{
+    width: 20px;
+    margin-right: 20px;
+}
+
+.btn2:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+}
+
+.Search {
+    padding:20px 50px;
+    margin-right: 30px;
+    margin-top: 5px;
+    font-size: 20px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    background: #fff;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.Search:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+}
+
+
+                                    /* End content*/
+
+                                    /* Start Footer*/
+
+.footer{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #41405f;
+    color: aliceblue;
+    padding: 40px;
+}
+
+footer div{
+    text-align: center;
+}
+
+.col-1 p{
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.Facebook{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.insta{
+    width: 21px;
+    margin-right: 10px;
+}
+
+.Twitter{
+    width: 24px;
+    margin-right: 10px;
+    align-items: center;
+}
+  
+.col-2{
+    flex-grow: 2;
+    align-items: center;
+}
+
+.col-2 form input{
+    width: 400px;
+    height: 45px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom:40px;
+    outline: none;
+    border: none;
+}
+
+.col-2 form button{
+    color: white;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.col-3 h3{
+    margin-bottom: 15px;
+}
+
+.col-3 a{
+    color: #fff;
+    line-height: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+                                /* End footer*/
+
+                                /* Start Log in */
+
+
+.main2{
+    background-color: rgb(234, 233, 234);
+}
+
+.log{
+    width: 400px;
+    height: 370px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.log h1{
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.log form{
+    width: 400px;
+    margin-left: 20px;
+}
+
+.log form label{
+    display: flex;
+    margin-top: 20px;
+    
+}
+
+.log form input{
+    width: 90%;
+    padding: 7px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+
+.log form button{
+    width: 200px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left: 14vh;
+    border: 2px solid gray;
+    border-radius: 30px;
+    background-color: rgb(22, 184, 22);
+}
+
+.log p{
+    
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.log a{
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+                                /* End Log in*/
+
+                                /* Start Register */
+
+.main3{
+    background-color: rgb(234, 233, 234);
+    height: 1150px;
+}
+
+.reg{
+    width: 400px;
+    height: 900px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.reg h1{
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.reg form{
+    width: 400px;
+    margin-left: 20px;
+}
+
+.reg form label{
+    display: flex;
+    margin-top: 20px;
+    
+}
+
+.reg form input{
+    width: 90%;
+    padding: 7px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+
+.reg form button{
+    width: 200px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left: 14vh;
+    border: 2px solid gray;
+    border-radius: 30px;
+    background-color: rgb(22, 184, 22);
+}
+
+.reg p{
+    
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.reg a{
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+                                /* End Register */
+
+                                /* Start Search */
+.smain {
+    width: 100%;
+    min-height: 140vh;
+    background-color: rgb(234, 233, 234);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 200px;
+}
+.SearchMain {
+    background-color: rgb(255, 255, 255);
+    width: 400px;
+    height: 330px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.SearchMain p{
+    padding-top: 20px;
+    margin-left: 10px;
+}
+
+.SearchMain form input{
+    width: 90%;
+    padding: 7px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.catbtn {
+    background-color: #ffffffc7;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.catbtn:hover {
+    background-color: #868585;
+}
+
+.dropbtn {
+    border: none;
+    background-color: #fff;
+    padding: 8px 8px;
+    border-radius: 5px;
+}
+
+.dropbtn:hover {
+    background-color: #bdb4b498;
+}
+
+.dropdown_item {
+    display: block;
+    color: black;
+    text-decoration: none;
+} 
+
+.dropdown ul{
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.79);
+}
+
+.dropdown:hover ul{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    border-radius: 5px;
+}
+
